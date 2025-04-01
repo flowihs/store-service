@@ -1,3 +1,38 @@
 spring:
   application:
     name: store-service
+
+
+  r2dbc:
+    username: postgres
+    password: postgres
+    url: r2dbc:postgresql://localhost:5432/store-db
+    pool:
+      enabled: true
+      initial-size: 10
+      max-idle-time: 10
+      max-size: 10
+
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        hbm2ddl:
+          auto: validate
+        jdbc:
+          batch_size: 50
+          fetch_size: 50
+        c3p0:
+          timeout: 10000
+        open-in-view: false
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        session:
+          jdbc:
+            initialize-schema: always

@@ -13,10 +13,14 @@ spring:
       max-idle-time: 10
       max-size: 10
 
-  data:
-    r2dbc:
-      repositories:
-        enabled: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    url: jdbc:postgresql://localhost:5432/store-db
+    user: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     properties:
@@ -36,3 +40,7 @@ spring:
         session:
           jdbc:
             initialize-schema: always
+
+logging:
+  level:
+    root: info

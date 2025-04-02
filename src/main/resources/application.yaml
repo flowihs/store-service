@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: store-service
+
+
+  r2dbc:
+    username: postgres
+    password: postgres
+    url: r2dbc:postgresql://localhost:5432/store-db
+    pool:
+      enabled: true
+      initial-size: 10
+      max-idle-time: 10
+      max-size: 10
+
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    url: jdbc:postgresql://localhost:5432/store-db
+    user: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        hbm2ddl:
+          auto: none
+        jdbc:
+          batch_size: 50
+          fetch_size: 50
+        c3p0:
+          timeout: 10000
+        open-in-view: false
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+        session:
+          jdbc:
+            initialize-schema: always
+
+logging:
+  level:
+    root: info

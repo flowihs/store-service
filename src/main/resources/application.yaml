@@ -28,7 +28,7 @@ spring:
         show_sql: false
         format_sql: true
         hbm2ddl:
-          auto: validate
+          auto: none
         jdbc:
           batch_size: 50
           fetch_size: 50

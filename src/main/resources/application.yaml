@@ -18,13 +18,13 @@ spring:
       repositories:
         enabled: true
 
-  liquibase:
-    enabled: true
-    change-log: classpath:/db/changelog/db.changelog-master.yaml
-    url: jdbc:postgresql://localhost:5432/store-db
-    user: postgres
-    password: postgres
-    driver-class-name: org.postgresql.Driver
+#  liquibase:
+#    enabled: true
+#    change-log: classpath:/db/changelog/db.changelog-master.yaml
+#    url: jdbc:postgresql://localhost:5432/store-db
+#    user: postgres
+#    password: postgres
+#    driver-class-name: org.postgresql.Driver
 
 logging:
   level:

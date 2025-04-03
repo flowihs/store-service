@@ -1,11 +1,12 @@
 package nocast.storeservice.category.persistence;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.MappedCollection;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
 import java.util.List;
@@ -19,43 +20,44 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Table("category")
 public class Category {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column("id")
     private Integer id;
 
-    @Column(nullable = false, unique = true)
+    @Column("slug")
     private String slug;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Category parent;
+    @Column("parent_id")
+    private Integer parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @MappedCollection(idColumn = "parent_id")
     private List<Category> children;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    @Column("sort_order")
     private Integer sortOrder = 0;
 
-    @Column(nullable = false, columnDefinition = "INT DEFAULT 0")
+    @Column("level")
     private Integer level = 0;
 
-    @Column(columnDefinition = "jsonb NOT NULL")
-    @JdbcTypeCode(SqlTypes.JSON)
+    @Column("translations")
     private Map<String, CategoryInfo> translations;
 
-    @Column(nullable = false, length = 2)
+    @Column("default_language_code")
     private String defaultLanguageCode;
 
+    @Column("name_default")
     private String nameDefault = null;
 
+    @Column("description-default")
     private String descriptionDefault = null;
 
-    @Column(nullable = false)
+    @Column("created_at")
     private Instant createdAt;
 
+    @Column("updated_at")
     private Instant updatedAt;
 }
 

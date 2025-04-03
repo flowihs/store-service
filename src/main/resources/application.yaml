@@ -10,9 +10,13 @@ spring:
     pool:
       enabled: true
       initial-size: 10
-      max-idle-time: 10
+      max-idle-time: 10m
       max-size: 10
 
+  data:
+    r2dbc:
+      repositories:
+        enabled: true
 
   liquibase:
     enabled: true
@@ -21,25 +25,6 @@ spring:
     user: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    properties:
-      hibernate:
-        show_sql: false
-        format_sql: true
-        jdbc:
-          batch_size: 50
-          fetch_size: 50
-        c3p0:
-          timeout: 10000
-        open-in-view: false
-        database: postgresql
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
-        session:
-          jdbc:
-            initialize-schema: always
 
 logging:
   level:

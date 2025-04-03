@@ -34,11 +34,13 @@ dependencies {
 	implementation 'org.springframework.modulith:spring-modulith-starter-core'
 // 	implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
     implementation 'org.liquibase:liquibase-core'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+	implementation 'org.postgresql:postgresql'
+	implementation 'org.postgresql:r2dbc-postgresql'
+
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
-	runtimeOnly 'org.postgresql:postgresql'
-	runtimeOnly 'org.postgresql:r2dbc-postgresql'
 
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 

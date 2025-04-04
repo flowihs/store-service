@@ -1,14 +1,14 @@
 package nocast.storeservice.category.persistence;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -16,46 +16,41 @@ import java.util.Map;
  * @mail vnavesnoj@gmail.com
  */
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Value
+@Builder(toBuilder = true)
+@Jacksonized
 @Table("category")
 public class Category {
-
     @Id
     @Column("id")
-    private Integer id;
+    Integer id;
 
     @Column("slug")
-    private String slug;
+    String slug;
 
     @Column("parent_id")
-    private Integer parent;
+    Integer parent;
 
     @Column("sort_order")
-    private Integer sortOrder = 0;
+    @Builder.Default
+    Integer sortOrder = 0;
 
     @Column("level")
-    private Integer level = 0;
+    @Builder.Default
+    Integer level = 0;
 
     @Column("translations")
-    private Map<String, CategoryInfo> translations;
+    Map<String, CategoryInfo> translations;
 
     @Column("default_lang_code")
-    private String defaultLangCode;
-
-    @Column("name_default")
-    private String nameDefault = null;
-
-    @Column("description_default")
-    private String descriptionDefault = null;
+    String defaultLangCode;
 
     @Column("created_at")
-    private Instant createdAt;
+    @Builder.Default
+    Instant createdAt = Instant.now();
 
     @Column("updated_at")
-    private Instant updatedAt;
+    Instant updatedAt;
 }
 
 

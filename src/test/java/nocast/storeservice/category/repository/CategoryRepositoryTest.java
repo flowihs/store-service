@@ -7,8 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.modulith.test.ApplicationModuleTest;
+import org.springframework.transaction.reactive.TransactionalOperator;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
+import java.time.Instant;
 import java.util.Map;
 
 /**
@@ -23,6 +26,26 @@ public class CategoryRepositoryTest {
     @Autowired
     private CategoryRepository repository;
 
+    @Autowired
+    private TransactionalOperator transactionalOperator;
+
+    private String nameRu = "name-ru";
+
+    private String nameEn = "name-en";
+
+    private String descriptionRu = "description-ru";
+
+    private String descriptionEn = "description-en";
+
+    private Category entity1 = Category.builder()
+            .slug("dummy-slug")
+            .translations(
+                    Map.of("ru", new CategoryInfo(nameRu, descriptionRu, null, null),
+                            "en", new CategoryInfo(nameEn, descriptionEn, null, null))
+            )
+            .defaultLangCode("ru")
+            .build();
+
 
     @Test
     void testConnectionToDb() {
@@ -33,26 +56,37 @@ public class CategoryRepositoryTest {
 
     @Test
     void correctSave() {
-        final var nameRu = "name-ru";
-        final var descriptionRu = "description-ru";
-        final var entity = Category.builder()
-                .slug("dummy-slug")
-                .translations(
-                        Map.of("ru", new CategoryInfo(nameRu, descriptionRu, null, null),
-                                "en", new CategoryInfo("name-en", "description-en", null, null))
-                )
-                .defaultLangCode("ru")
-                .build();
-        final var blocked = repository.save(entity).block();
-        System.out.println(blocked);
-        StepVerifier.create(repository.findById(blocked.getId()))
-                .expectNextMatches(it -> {
-                            System.out.println(it);
-                            return it.getId() != null
-                                    && it.getNameDefault().equals(nameRu)
-                                    && it.getDescriptionDefault().equals(descriptionRu);
-                        }
-                )
+        Mono<Category> operation = repository.save(entity1)
+                .flatMap(saved -> repository.findById(saved.getId()))
+                .as(transactionalOperator::transactional);
+
+        StepVerifier.create(operation)
+                .expectNextMatches(saved -> {
+                    System.out.println("Saved and retrieved: " + saved);
+                    return saved.getId() != null
+                            && saved.getSlug().equals(entity1.getSlug());
+                })
+                .verifyComplete();
+    }
+
+    @Test
+    void correctUpdate() {
+        Mono<Category> operation = repository.save(entity1)
+                .map(saved -> saved.toBuilder()
+                        .slug("updated-slug")
+                        .defaultLangCode("en")
+                        .updatedAt(Instant.now())
+                        .build())
+                .flatMap(repository::save)
+                .as(transactionalOperator::transactional);
+
+        StepVerifier.create(operation)
+                .expectNextMatches(updated -> {
+                    System.out.println("Updated entity: " + updated);
+                    return updated.getId() != null
+                            && updated.getSlug().equals("updated-slug")
+                            && updated.getDefaultLangCode().equals("en");
+                })
                 .verifyComplete();
     }
 }

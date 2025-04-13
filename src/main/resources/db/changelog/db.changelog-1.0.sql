@@ -4,7 +4,6 @@
 CREATE TABLE category
 (
     id                SERIAL PRIMARY KEY,
-    slug              VARCHAR(255) NOT NULL UNIQUE,
     parent_id         INT          REFERENCES category (id) ON DELETE SET NULL,
     sort_order        INT          NOT NULL,
     level             INT          NOT NULL,

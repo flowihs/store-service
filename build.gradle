@@ -29,14 +29,11 @@ ext {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-// 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.modulith:spring-modulith-starter-core'
-// 	implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
-    implementation 'org.liquibase:liquibase-core'
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
+//     implementation 'org.springframework.modulith:spring-modulith-starter-jpa'
+	implementation 'org.liquibase:liquibase-core'
 	implementation 'org.postgresql:postgresql'
-	implementation 'org.postgresql:r2dbc-postgresql'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
@@ -46,12 +43,10 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.modulith:spring-modulith-starter-test'
 	testImplementation 'org.springframework.modulith:spring-modulith-junit'
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
-	testImplementation 'org.testcontainers:r2dbc'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

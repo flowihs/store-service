@@ -7,6 +7,7 @@ import lombok.Value;
  * @mail vnavesnoj@gmail.com
  */
 
+
 @Value
 public class CategoryReadDto {
 

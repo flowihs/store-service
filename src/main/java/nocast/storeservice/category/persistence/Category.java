@@ -1,18 +1,18 @@
 package nocast.storeservice.category.persistence;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Value;
 import lombok.extern.jackson.Jacksonized;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.Instant;
 import java.util.Map;
 
 /**
- * @author vnavesnoj
- * @mail vnavesnoj@gmail.com
+ * @author zaraza
+ * @mail zaraza.yt@mail.ru
  */
 
 @Value
@@ -21,34 +21,34 @@ import java.util.Map;
 @Table("category")
 public class Category {
     @Id
-    @Column("id")
+    @Column(name = "id")
     Integer id;
 
-    @Column("slug")
+    @Column(name = "slug")
     String slug;
 
-    @Column("parent_id")
+    @Column(name = "parent_id")
     Integer parent;
 
-    @Column("sort_order")
+    @Column(name = "sort_order")
     @Builder.Default
     Integer sortOrder = 0;
 
-    @Column("level")
+    @Column(name = "level")
     @Builder.Default
     Integer level = 0;
 
-    @Column("translations")
+    @Column(name = "translations")
     Map<String, CategoryInfo> translations;
 
-    @Column("default_lang_code")
+    @Column(name = "default_lang_code")
     String defaultLangCode;
 
-    @Column("created_at")
+    @Column(name = "created_at")
     @Builder.Default
     Instant createdAt = Instant.now();
 
-    @Column("updated_at")
+    @Column(name = "updated_at")
     Instant updatedAt;
 }
 

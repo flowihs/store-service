@@ -29,6 +29,8 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
     private final Mapper<Category, CategoryTreeDto> categoryTreeMapper;
     private final Mapper<Category, CategoryBranchDto> categoryBranchMapper;
+    private final Mapper<CategoryEditDto, Category> categoryEditMapper;
+    private final Mapper<CategoryCreateDto, Category> categoryCreateMapper;
     private final Sort defaultSort = by(sortOrder, id);
     private final Pageable defaultPageable = PageRequest.of(0, 20, defaultSort);
 
@@ -49,22 +51,31 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Optional<CategoryBranchDto> findById(Integer id) {
-        return Optional.empty();
+    public Optional<CategoryBranchDto> findById(final Integer id) {
+        return categoryRepository.findById(id).map(categoryBranchMapper::map);
     }
 
     @Override
     public CategoryBranchDto create(CategoryCreateDto category) {
-        return null;
+        Category map = categoryCreateMapper.map(category);
+        categoryRepository.save(map);
+        return categoryBranchMapper.map(map);
     }
 
     @Override
-    public Optional<CategoryBranchDto> updateById(Integer id, CategoryEditDto category) {
-        return Optional.empty();
+    public Optional<CategoryBranchDto> updateById(final Integer id, final CategoryEditDto category) {
+        return categoryRepository.findById(id)
+                .map(it -> categoryEditMapper.map(category, it))
+                .map(categoryRepository::saveAndFlush)
+                .map(categoryBranchMapper::map);
     }
 
     @Override
-    public boolean deleteById(Integer id) {
+    public boolean deleteById(final Integer id) {
+        if (categoryRepository.existsById(id)) {
+            categoryRepository.deleteById(id);
+            return true;
+        }
         return false;
     }
 }

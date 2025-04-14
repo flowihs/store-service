@@ -78,6 +78,3 @@ public class Category {
         subcategory.setParent(null);
     }
 }
-
-
-

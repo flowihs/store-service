@@ -8,9 +8,10 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.Comparator.comparingInt;
 
 /**
  * @author vnavesnoj
@@ -37,7 +38,7 @@ public class CategoryTreeMapper implements Mapper<Category, CategoryTreeDto> {
     private List<CategoryTreeDto> mapSubcategories(List<Category> subcategories) {
         if (subcategories != null) {
             return subcategories.stream()
-                    .sorted(Comparator.comparingInt(Category::getSortOrder))
+                    .sorted(comparingInt(Category::getSortOrder))
                     .map(this::map)
                     .toList();
         } else {

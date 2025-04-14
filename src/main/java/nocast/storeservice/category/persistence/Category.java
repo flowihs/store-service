@@ -2,10 +2,8 @@ package nocast.storeservice.category.persistence;
 
 import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -24,6 +22,8 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = "subcategories")
+@FieldNameConstants
 @Entity
 @Table(name = "category")
 public class Category {

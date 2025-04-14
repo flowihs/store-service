@@ -1,9 +1,6 @@
 package nocast.storeservice.category.service;
 
-import nocast.storeservice.category.dto.CategoryCreateDto;
-import nocast.storeservice.category.dto.CategoryEditDto;
-import nocast.storeservice.category.dto.CategoryFilter;
-import nocast.storeservice.category.dto.CategoryReadDto;
+import nocast.storeservice.category.dto.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,17 +13,17 @@ import java.util.Optional;
 
 public interface CategoryService {
 
-    Page<CategoryReadDto> findAll();
+    Page<CategoryTreeDto> findAll();
 
-    Page<CategoryReadDto> findAll(Pageable pageable);
+    Page<CategoryTreeDto> findAll(Pageable pageable);
 
-    Page<CategoryReadDto> findAll(Pageable pageable, CategoryFilter filter);
+    Page<CategoryTreeDto> findAll(Pageable pageable, CategoryFilter filter);
 
-    Optional<CategoryReadDto> findById(Integer id);
+    Optional<CategoryBranchDto> findById(Integer id);
 
-    CategoryReadDto create(CategoryCreateDto category);
+    CategoryBranchDto create(CategoryCreateDto category);
 
-    Optional<CategoryReadDto> updateById(Integer id, CategoryEditDto category);
+    Optional<CategoryBranchDto> updateById(Integer id, CategoryEditDto category);
 
     boolean deleteById(Integer id);
 }

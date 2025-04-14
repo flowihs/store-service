@@ -1,6 +1,7 @@
 package nocast.storeservice.category.dto;
 
 import lombok.Value;
+import nocast.storeservice.category.persistence.CategoryInfo;
 
 /**
  * @author vnavesnoj
@@ -9,4 +10,10 @@ import lombok.Value;
 
 @Value
 public class CategoryBranchDto {
+    Integer id;
+    CategoryBranchDto parent;
+    CategoryInfo info;
+    Integer sortOrder;
+    Integer level;
+    String image;
 }

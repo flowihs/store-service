@@ -1,5 +1,6 @@
 package nocast.storeservice.category.mapper;
 
+import lombok.NonNull;
 import nocast.storeservice.category.dto.CategoryReadDto;
 import nocast.storeservice.category.persistence.Category;
 import nocast.storeservice.category.persistence.CategoryInfo;
@@ -17,15 +18,22 @@ import java.util.Optional;
 public class CategoryReadMapper implements Mapper<Category, CategoryReadDto> {
 
     @Override
-    public CategoryReadDto map(Category object) {
+    public CategoryReadDto map(@NonNull Category object) {
         final var langCode = LocaleContextHolder.getLocale().getLanguage();
-        final var parentInfo = object.getParent().getTranslations().get(langCode);
+        final var parentId = Optional.of(object)
+                .map(Category::getParent)
+                .map(Category::getId)
+                .orElse(null);
+        final var parentInfo = Optional.of(object)
+                .map(Category::getParent)
+                .map(Category::getTranslations)
+                .map(it -> it.get(langCode))
+                .map(CategoryInfo::getName)
+                .orElse(null);
         return new CategoryReadDto(
                 object.getId(),
-                object.getParent().getId(),
-                Optional.ofNullable(parentInfo)
-                        .map(CategoryInfo::getName)
-                        .orElse(null),
+                parentId,
+                parentInfo,
                 object.getTranslations().get(langCode),
                 object.getSortOrder(),
                 object.getLevel(),

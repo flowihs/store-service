@@ -46,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
         return Optional.of(pageable)
                 .map(it -> it.getSort().isSorted()
                         ? it
-                        : PageRequest.of(it.getPageNumber(), it.getPageSize())
+                        : PageRequest.of(it.getPageNumber(), it.getPageSize(), defaultSort)
                 )
                 .map(categoryRepository::findAll)
                 .orElse(Page.empty())

@@ -1,18 +1,14 @@
 package nocast.storeservice.category.persistence;
 
-import io.hypersistence.utils.hibernate.type.json.JsonBinaryType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UpdateTimestamp;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
+import org.hibernate.annotations.CollectionType;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
 import java.util.Map;
 
 /**
@@ -20,65 +16,46 @@ import java.util.Map;
  * @mail zaraza.yt@mail.ru
  */
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Builder(toBuilder = true)
+@Jacksonized
 @Entity
+@NoArgsConstructor
 @Table(name = "category")
 public class Category {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id")
+    Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", referencedColumnName = "id")
-    private Category parent;
+    @Column(name = "slug")
+    String slug;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "parent_id")
+    Integer parent;
+
+    @Column(name = "sort_order")
     @Builder.Default
-    private List<Category> subcategories = new ArrayList<>();
+    Integer sortOrder = 0;
 
-    @Column(name = "sort_order", nullable = false)
+    @Column(name = "level")
     @Builder.Default
-    private Integer sortOrder = 0;
+    Integer level = 0;
 
-    @Column(nullable = false)
+    @ElementCollection
+    @CollectionTable(name = "category_info", joinColumns = @JoinColumn(name = "category_id"))
+    @MapKeyColumn(name = "default_lang_code")
+    @Column(name = "translations")
+    Map<String, CategoryInfo> translations;
+
+    @Column(name = "default_lang_code")
+    String defaultLangCode;
+
+    @Column(name = "created_at")
     @Builder.Default
-    private Integer level = 0;
+    Instant createdAt = Instant.now();
 
-    @Column(length = 255)
-    private String image;
-
-    @Column(name = "is_active")
-    private Boolean isActive;
-
-    @Column(columnDefinition = "jsonb", nullable = false)
-    @Type(JsonBinaryType.class)
-//    @Convert(converter = CategoryInfoJsonConverter.class)
-    private Map<String, CategoryInfo> translations;
-
-    @Column(name = "default_lang_code", nullable = false, length = 7)
-    private String defaultLangCode;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
     @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-
-    public void addSubcategory(Category subcategory) {
-        subcategories.add(subcategory);
-        subcategory.setParent(this);
-    }
-
-    public void removeSubcategory(Category subcategory) {
-        subcategories.remove(subcategory);
-        subcategory.setParent(null);
-    }
+    Instant updatedAt;
 }
 
 

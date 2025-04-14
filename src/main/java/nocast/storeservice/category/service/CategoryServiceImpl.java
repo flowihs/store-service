@@ -5,6 +5,7 @@ import nocast.storeservice.category.dto.CategoryCreateDto;
 import nocast.storeservice.category.dto.CategoryEditDto;
 import nocast.storeservice.category.dto.CategoryFilter;
 import nocast.storeservice.category.dto.CategoryReadDto;
+import nocast.storeservice.category.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Component
 public class CategoryServiceImpl implements CategoryService {
+private final CategoryRepository categoryRepository;
+
 
     @Override
     public Page<CategoryReadDto> findAll() {
@@ -42,7 +45,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryReadDto create(CategoryCreateDto category) {
-        return null;
+        return
     }
 
     @Override

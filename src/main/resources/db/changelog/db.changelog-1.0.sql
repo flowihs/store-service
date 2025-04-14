@@ -17,3 +17,7 @@ CREATE TABLE category
 
 --changeset vnavesnoj:2
 ALTER TABLE category DROP COLUMN default_lang_code;
+
+--changeset vnavesnoj:3
+ALTER TABLE category
+ALTER COLUMN is_active SET NOT NULL;

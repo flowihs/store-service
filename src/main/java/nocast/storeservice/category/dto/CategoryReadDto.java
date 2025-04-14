@@ -16,6 +16,8 @@ public class CategoryReadDto {
 
     Integer parentId;
 
+    String parentName;
+
     CategoryInfo info;
 
     Integer sortOrder;
@@ -23,6 +25,4 @@ public class CategoryReadDto {
     Integer level;
 
     String image;
-
-    Boolean isActive;
 }

@@ -51,8 +51,9 @@ public class Category {
     @Column(length = 255)
     private String image;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
+    @Column(name = "is_active", nullable = false)
+    @Builder.Default
+    private boolean isActive = true;
 
     @Column(columnDefinition = "jsonb", nullable = false)
     @Type(JsonBinaryType.class)

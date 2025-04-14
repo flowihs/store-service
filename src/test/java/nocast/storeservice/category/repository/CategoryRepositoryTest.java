@@ -39,7 +39,6 @@ public class CategoryRepositoryTest {
                     Map.of("ru", new CategoryInfo(nameRu, descriptionRu, null, null),
                             "en", new CategoryInfo(nameEn, descriptionEn, null, null))
             )
-            .defaultLangCode("ru")
             .build();
 
     @Test

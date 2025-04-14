@@ -14,3 +14,6 @@ CREATE TABLE category
     created_at        TIMESTAMP    NOT NULL,
     updated_at        TIMESTAMP
 );
+
+--changeset vnavesnoj:2
+ALTER TABLE category DROP COLUMN default_lang_code;

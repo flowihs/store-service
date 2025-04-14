@@ -59,9 +59,6 @@ public class Category {
 //    @Convert(converter = CategoryInfoJsonConverter.class)
     private Map<String, CategoryInfo> translations;
 
-    @Column(name = "default_lang_code", nullable = false, length = 7)
-    private String defaultLangCode;
-
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;

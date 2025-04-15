@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nocast.storeservice.category.dto.CategoryFilter;
 import nocast.storeservice.category.dto.CategoryReadDto;
 import nocast.storeservice.category.dto.TreeViewOptions;
+import nocast.storeservice.category.mapper.CategoryPredicateMapper;
 import nocast.storeservice.category.mapper.CategoryReadMapper;
 import nocast.storeservice.category.persistence.Category;
 import nocast.storeservice.category.repository.CategoryRepository;
@@ -29,6 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final CategoryReadMapper categoryReadMapper;
+    private final CategoryPredicateMapper categoryPredicateMapper;
     private final TreeViewOptions defaultTreeViewOptions = new TreeViewOptions(Integer.MAX_VALUE, 1);
     private final Sort defaultSort = by(sortOrder, Category.Fields.id);
     private final Pageable defaultPageable = PageRequest.of(0, 20, defaultSort);
@@ -36,23 +38,23 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<CategoryReadDto> findAll() {
-        return this.findAll(defaultTreeViewOptions, defaultPageable);
+        return this.findAll(defaultTreeViewOptions, defaultPageable, new CategoryFilter(0, null, null));
     }
 
     @Override
     public Page<CategoryReadDto> findAll(TreeViewOptions options) {
-        return this.findAll(options, defaultPageable);
+        return this.findAll(options, defaultPageable, new CategoryFilter(0, null, null));
     }
 
     @Override
     public Page<CategoryReadDto> findAll(TreeViewOptions options, Pageable pageable) {
-        return categoryRepository.findAllByLevelAndActive(0, true, pageable)
-                .map(it -> categoryReadMapper.map(it, options.getBranchDepth(), options.getTreeDepth()));
+        return this.findAll(options, pageable, new CategoryFilter(0, null, null));
     }
 
     @Override
     public Page<CategoryReadDto> findAll(TreeViewOptions options, Pageable pageable, CategoryFilter filter) {
-        return null;
+        return categoryRepository.findAllByActive(true, pageable, categoryPredicateMapper.map(filter))
+                .map(it -> categoryReadMapper.map(it, options.getBranchDepth(), options.getTreeDepth()));
     }
 
     @Override

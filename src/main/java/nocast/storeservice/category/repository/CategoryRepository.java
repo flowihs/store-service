@@ -1,6 +1,7 @@
 package nocast.storeservice.category.repository;
 
 import com.querydsl.core.types.Predicate;
+import lombok.NonNull;
 import nocast.storeservice.category.persistence.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,11 +21,9 @@ import java.util.Optional;
 public interface CategoryRepository extends JpaRepository<Category, Integer>, QuerydslPredicateExecutor<Category> {
 
     @EntityGraph(attributePaths = {"parent", "subcategories"})
-    Optional<Category> findByIdAndActive(Integer id, boolean active);
+    Optional<Category> findByIdAndActive(Integer id, boolean isActive);
 
+    @NonNull
     @EntityGraph(attributePaths = {"parent", "subcategories"})
-    Page<Category> findAllByLevelAndActive(Integer level, boolean active, Pageable pageable);
-
-    @EntityGraph(attributePaths = {"parent", "subcategories"})
-    Page<Category> findAllByActive(boolean active, Pageable pageable, Predicate predicate);
+    Page<Category> findAll(@NonNull Predicate predicate, @NonNull Pageable pageable);
 }

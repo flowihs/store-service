@@ -9,5 +9,7 @@ import lombok.Value;
 
 @Value
 public class CategoryFilter {
-    //TODO
+    String name;
+    Integer level;
+    Integer parentId;
 }

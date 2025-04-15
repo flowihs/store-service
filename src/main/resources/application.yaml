@@ -23,5 +23,4 @@ spring:
 
 logging:
   level:
-    root: info
-    org.springframework.r2dbc: DEBUG
+    root: INFO

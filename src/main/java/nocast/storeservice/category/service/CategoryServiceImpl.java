@@ -1,9 +1,8 @@
 package nocast.storeservice.category.service;
 
 import lombok.RequiredArgsConstructor;
-import nocast.storeservice.category.dto.*;
-import nocast.storeservice.category.mapper.Mapper;
-import nocast.storeservice.category.persistence.Category;
+import nocast.storeservice.category.dto.CategoryReadDto;
+import nocast.storeservice.category.dto.TreeViewOptions;
 import nocast.storeservice.category.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,8 +26,6 @@ import static org.springframework.data.domain.Sort.by;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
-    private final Mapper<Category, CategoryTreeDto> categoryTreeMapper;
-    private final Mapper<Category, CategoryBranchDto> categoryBranchMapper;
     private final Sort defaultSort = by(sortOrder, id);
     private final Pageable defaultPageable = PageRequest.of(0, 20, defaultSort);
 
@@ -51,20 +48,5 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public Optional<CategoryReadDto> findById(Integer id) {
         return Optional.empty();
-    }
-
-    @Override
-    public CategoryReadDto create(CategoryCreateDto category) {
-        return null;
-    }
-
-    @Override
-    public Optional<CategoryReadDto> updateById(Integer id, CategoryEditDto category) {
-        return Optional.empty();
-    }
-
-    @Override
-    public boolean deleteById(Integer id) {
-        return false;
     }
 }

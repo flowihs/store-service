@@ -36,23 +36,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<CategoryReadDto> findAll() {
-        return categoryRepository.findAllByLevelAndActive(0, true, defaultPageable)
-                .map(it -> categoryReadMapper.map(
-                        it,
-                        defaultTreeViewOptions.getBranchDepth(),
-                        defaultTreeViewOptions.getTreeDepth()
-                ));
+        return this.findAll(defaultTreeViewOptions, defaultPageable);
     }
 
     @Override
     public Page<CategoryReadDto> findAll(TreeViewOptions options) {
-        return categoryRepository.findAllByLevelAndActive(0, true, defaultPageable)
-                .map(it -> categoryReadMapper.map(it, options.getBranchDepth(), options.getTreeDepth()));
+        return this.findAll(options, defaultPageable);
     }
 
     @Override
     public Page<CategoryReadDto> findAll(TreeViewOptions options, Pageable pageable) {
-        return null;
+        return categoryRepository.findAllByLevelAndActive(0, true, pageable)
+                .map(it -> categoryReadMapper.map(it, options.getBranchDepth(), options.getTreeDepth()));
     }
 
     @Override

@@ -34,32 +34,32 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public Page<CategoryTreeDto> findAll() {
+    public Page<CategoryReadDto> findAll() {
         return null;
     }
 
     @Override
-    public Page<CategoryTreeDto> findAll(Pageable pageable) {
+    public Page<CategoryReadDto> findAll(TreeViewOptions options) {
         return null;
     }
 
     @Override
-    public Page<CategoryTreeDto> findAll(Pageable pageable, CategoryFilter filter) {
+    public Page<CategoryReadDto> findAll(TreeViewOptions options, Pageable pageable) {
         return null;
     }
 
     @Override
-    public Optional<CategoryBranchDto> findById(Integer id) {
+    public Optional<CategoryReadDto> findById(Integer id) {
         return Optional.empty();
     }
 
     @Override
-    public CategoryBranchDto create(CategoryCreateDto category) {
+    public CategoryReadDto create(CategoryCreateDto category) {
         return null;
     }
 
     @Override
-    public Optional<CategoryBranchDto> updateById(Integer id, CategoryEditDto category) {
+    public Optional<CategoryReadDto> updateById(Integer id, CategoryEditDto category) {
         return Optional.empty();
     }
 

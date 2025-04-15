@@ -1,5 +1,6 @@
 package nocast.storeservice.category.mapper;
 
+import lombok.NonNull;
 import nocast.storeservice.category.dto.CategoryBranchDto;
 import nocast.storeservice.category.persistence.Category;
 import nocast.storeservice.category.persistence.CategoryInfo;
@@ -14,16 +15,20 @@ import java.util.Map;
  */
 
 @Component
-public class CategoryBranchMapper implements Mapper<Category, CategoryBranchDto> {
+public class CategoryBranchRecursiveMapper implements RecursiveMapper<Category, CategoryBranchDto> {
 
     @Override
-    public CategoryBranchDto map(Category object) {
+    public CategoryBranchDto map(@NonNull Category object, int depth) {
         return new CategoryBranchDto(
                 object.getId(),
-                object.getParent() != null ? this.map(object.getParent()) : null,
+                object.getParent() != null && depth > 0
+                        ? this.map(object.getParent(), --depth)
+                        : null,
                 extractCategoryInfo(object.getTranslations()),
                 object.getSortOrder(),
                 object.getLevel(),
+                object.isRoot(),
+                object.isLeaf(),
                 object.getImage()
         );
     }

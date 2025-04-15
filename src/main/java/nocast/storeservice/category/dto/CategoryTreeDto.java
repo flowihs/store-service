@@ -13,8 +13,8 @@ import java.util.List;
 @Value
 public class CategoryTreeDto {
     Integer id;
-    CategoryInfo info;
     Integer parentId;
+    CategoryInfo info;
     List<CategoryTreeDto> subcategories;
     Integer sortOrder;
     Integer level;

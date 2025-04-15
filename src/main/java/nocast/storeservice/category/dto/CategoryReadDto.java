@@ -13,9 +13,9 @@ import java.util.List;
 @Value
 public class CategoryReadDto {
     Integer id;
-    CategoryInfo info;
     CategoryBranchDto parent;
     List<CategoryTreeDto> subcategories;
+    CategoryInfo info;
     Integer sortOrder;
     Integer level;
     boolean isRoot;

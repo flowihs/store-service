@@ -1,6 +1,6 @@
 package nocast.storeservice.category.mapper;
 
-import lombok.RequiredArgsConstructor;
+import lombok.NonNull;
 import nocast.storeservice.category.dto.CategoryTreeDto;
 import nocast.storeservice.category.persistence.Category;
 import nocast.storeservice.category.persistence.CategoryInfo;
@@ -19,31 +19,31 @@ import static java.util.Comparator.comparingInt;
  */
 
 @Component
-@RequiredArgsConstructor
-public class CategoryTreeMapper implements Mapper<Category, CategoryTreeDto> {
+public class CategoryTreeRecursiveMapper implements RecursiveMapper<Category, CategoryTreeDto> {
 
     @Override
-    public CategoryTreeDto map(Category category) {
+    public CategoryTreeDto map(@NonNull Category object, int depth) {
         return new CategoryTreeDto(
-                category.getId(),
-                category.getParent() != null ? category.getParent().getId() : null,
-                extractCategoryInfo(category.getTranslations()),
-                category.getSortOrder(),
-                category.getLevel(),
-                category.getImage(),
-                mapSubcategories(category.getSubcategories())
+                object.getId(),
+                object.getParent() != null ? object.getParent().getId() : null,
+                extractCategoryInfo(object.getTranslations()),
+                mapSubcategories(object.getSubcategories(), depth),
+                object.getSortOrder(),
+                object.getLevel(),
+                object.isRoot(),
+                object.isLeaf(),
+                object.getImage()
         );
     }
 
-    private List<CategoryTreeDto> mapSubcategories(List<Category> subcategories) {
-        if (subcategories != null) {
-            return subcategories.stream()
-                    .sorted(comparingInt(Category::getSortOrder))
-                    .map(this::map)
-                    .toList();
-        } else {
+    private List<CategoryTreeDto> mapSubcategories(List<Category> subcategories, int depth) {
+        if (subcategories == null || depth < 1) {
             return Collections.emptyList();
         }
+        return subcategories.stream()
+                .sorted(comparingInt(Category::getSortOrder))
+                .map(it -> this.map(it, depth - 1))
+                .toList();
     }
 
     private CategoryInfo extractCategoryInfo(Map<String, CategoryInfo> translations) {

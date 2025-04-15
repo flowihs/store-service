@@ -13,10 +13,12 @@ import java.util.List;
 @Value
 public class CategoryTreeDto {
     Integer id;
-    Integer parentId;
     CategoryInfo info;
+    Integer parentId;
+    List<CategoryTreeDto> subcategories;
     Integer sortOrder;
     Integer level;
+    boolean isRoot;
+    boolean isLeaf;
     String image;
-    List<CategoryTreeDto> subcategories;
 }

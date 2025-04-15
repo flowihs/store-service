@@ -15,5 +15,7 @@ public class CategoryBranchDto {
     CategoryInfo info;
     Integer sortOrder;
     Integer level;
+    boolean isRoot;
+    boolean isLeaf;
     String image;
 }

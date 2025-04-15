@@ -40,6 +40,12 @@ public class Category {
     @Builder.Default
     private List<Category> subcategories = new ArrayList<>();
 
+    @Column(name = "is_root", nullable = false)
+    private boolean isRoot;
+
+    @Column(name = "is_leaf", nullable = false)
+    private boolean isLeaf;
+
     @Column(name = "sort_order", nullable = false)
     @Builder.Default
     private Integer sortOrder = 0;

@@ -3,6 +3,7 @@ package nocast.storeservice.category.service;
 import lombok.RequiredArgsConstructor;
 import nocast.storeservice.category.dto.CategoryReadDto;
 import nocast.storeservice.category.dto.TreeViewOptions;
+import nocast.storeservice.category.mapper.CategoryReadMapper;
 import nocast.storeservice.category.repository.CategoryRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,8 @@ import static org.springframework.data.domain.Sort.by;
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryReadMapper categoryReadMapper;
+    private final TreeViewOptions defaultTreeViewOptions = new TreeViewOptions(Integer.MAX_VALUE, 1);
     private final Sort defaultSort = by(sortOrder, id);
     private final Pageable defaultPageable = PageRequest.of(0, 20, defaultSort);
 
@@ -47,6 +50,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Optional<CategoryReadDto> findById(Integer id) {
-        return Optional.empty();
+        return categoryRepository.findByIdAndActive(id, true)
+                .map(it -> categoryReadMapper.map(
+                        it,
+                        defaultTreeViewOptions.getBranchDepth(),
+                        defaultTreeViewOptions.getTreeDepth()
+                ));
     }
 }

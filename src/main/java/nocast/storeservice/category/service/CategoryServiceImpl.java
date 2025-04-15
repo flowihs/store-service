@@ -34,23 +34,23 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryReadMapper categoryReadMapper;
     private final CategoryPredicateMapper categoryPredicateMapper;
     private final TreeViewOptions defaultTreeViewOptions = new TreeViewOptions(Integer.MAX_VALUE, 1);
+    private final CategoryFilter defaultFilter = CategoryFilter.builder().level(0).build();
     private final Sort defaultSort = by(sortOrder, id);
     private final Pageable defaultPageable = PageRequest.of(0, 20, defaultSort);
 
-
     @Override
     public Page<CategoryReadDto> findAll() {
-        return this.findAll(defaultTreeViewOptions, defaultPageable, CategoryFilter.builder().level(0).build());
+        return this.findAll(defaultTreeViewOptions, defaultPageable, defaultFilter);
     }
 
     @Override
     public Page<CategoryReadDto> findAll(TreeViewOptions options) {
-        return this.findAll(options, defaultPageable, CategoryFilter.builder().level(0).build());
+        return this.findAll(options, defaultPageable, defaultFilter);
     }
 
     @Override
     public Page<CategoryReadDto> findAll(TreeViewOptions options, Pageable pageable) {
-        return this.findAll(options, pageable, CategoryFilter.builder().level(0).build());
+        return this.findAll(options, pageable, defaultFilter);
     }
 
     @Override

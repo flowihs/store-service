@@ -5,6 +5,7 @@ import nocast.storeservice.category.dto.*;
 import nocast.storeservice.category.mapper.Mapper;
 import nocast.storeservice.category.persistence.Category;
 import nocast.storeservice.category.repository.CategoryRepository;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<CategoryTreeDto> findAll() {
-        return null;
+        return categoryRepository.findAll(defaultPageable)
+                .map(categoryTreeMapper::map);
     }
 
     @Override
@@ -52,30 +54,10 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Optional<CategoryBranchDto> findById(final Integer id) {
-        return categoryRepository.findById(id).map(categoryBranchMapper::map);
-    }
-
-    @Override
-    public CategoryBranchDto create(CategoryCreateDto category) {
-        Category map = categoryCreateMapper.map(category);
-        categoryRepository.save(map);
-        return categoryBranchMapper.map(map);
-    }
-
-    @Override
-    public Optional<CategoryBranchDto> updateById(final Integer id, final CategoryEditDto category) {
         return categoryRepository.findById(id)
-                .map(it -> categoryEditMapper.map(category, it))
-                .map(categoryRepository::saveAndFlush)
                 .map(categoryBranchMapper::map);
     }
 
-    @Override
-    public boolean deleteById(final Integer id) {
-        if (categoryRepository.existsById(id)) {
-            categoryRepository.deleteById(id);
-            return true;
-        }
-        return false;
-    }
+
+
 }

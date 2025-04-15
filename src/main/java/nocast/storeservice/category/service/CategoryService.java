@@ -21,9 +21,4 @@ public interface CategoryService {
 
     Optional<CategoryBranchDto> findById(Integer id);
 
-    CategoryBranchDto create(CategoryCreateDto category);
-
-    Optional<CategoryBranchDto> updateById(Integer id, CategoryEditDto category);
-
-    boolean deleteById(Integer id);
 }

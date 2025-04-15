@@ -1,6 +1,5 @@
 package nocast.storeservice.category.repository;
 
-import nocast.storeservice.TestcontainersConfiguration;
 import nocast.storeservice.category.persistence.Category;
 import nocast.storeservice.category.persistence.CategoryInfo;
 import org.junit.jupiter.api.Test;
@@ -11,14 +10,8 @@ import org.springframework.test.annotation.Rollback;
 
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-/**
- * @author vnavesnoj
- * @mail vnavesnoj@gmail.com
- */
-
-@Import(TestcontainersConfiguration.class)
 @Rollback
 @ApplicationModuleTest
 public class CategoryRepositoryTest {

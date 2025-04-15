@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: store-service
+
+
+  datasource:
+    username: postgres
+    password: root
+    url: jdbc:postgresql://localhost:5432/test-db
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+#  liquibase:
+#    enabled: true
+#    change-log: classpath:/db/changelog/db.changelog-master.yaml
+#    url: jdbc:postgresql://localhost:5432/store-db
+#    user: postgres
+#    password: postgres
+#    driver-class-name: org.postgresql.Driver
+
+logging:
+  level:
+    root: info
+    org.springframework.r2dbc: DEBUG

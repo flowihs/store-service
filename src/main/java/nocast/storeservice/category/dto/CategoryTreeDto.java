@@ -11,11 +11,11 @@ import java.util.List;
  */
 
 @Value
-public class CategoryReadDto {
+public class CategoryTreeDto {
     Integer id;
-    CategoryBranchDto parent;
-    List<CategoryTreeDto> subcategories;
+    Integer parentId;
     CategoryInfo info;
+    List<CategoryTreeDto> subcategories;
     Integer sortOrder;
     Integer level;
     boolean isRoot;

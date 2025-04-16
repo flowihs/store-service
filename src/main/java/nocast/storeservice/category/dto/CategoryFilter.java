@@ -1,5 +1,6 @@
 package nocast.storeservice.category.dto;
 
+import lombok.Builder;
 import lombok.Value;
 
 /**
@@ -8,6 +9,12 @@ import lombok.Value;
  */
 
 @Value
+@Builder
 public class CategoryFilter {
-    //TODO
+    Integer level;
+    Boolean isRoot;
+    Boolean isLeaf;
+    Integer parentId;
+    String name;
+    Boolean isActive = true;
 }

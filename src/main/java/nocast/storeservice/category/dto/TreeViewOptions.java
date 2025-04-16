@@ -8,6 +8,7 @@ import lombok.Value;
  */
 
 @Value
-public class CategoryEditDto {
-    //TODO
+public class TreeViewOptions {
+    Integer branchDepth;
+    Integer treeDepth;
 }

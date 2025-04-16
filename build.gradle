@@ -36,12 +36,16 @@ dependencies {
     implementation 'io.hypersistence:hypersistence-utils-hibernate-63:3.9.9'
 	implementation 'org.liquibase:liquibase-core'
 	implementation 'org.postgresql:postgresql'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jakarta'
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.boot:spring-boot-testcontainers'

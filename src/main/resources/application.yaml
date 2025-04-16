@@ -13,6 +13,9 @@ spring:
     hibernate:
       ddl-auto: validate
 
+  web:
+    locale: ru
+
 #  liquibase:
 #    enabled: true
 #    change-log: classpath:/db/changelog/db.changelog-master.yaml
@@ -23,5 +26,4 @@ spring:
 
 logging:
   level:
-    root: info
-    org.springframework.r2dbc: DEBUG
+    root: INFO

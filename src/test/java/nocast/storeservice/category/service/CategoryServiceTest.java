@@ -41,7 +41,7 @@ public class CategoryServiceTest {
 
         @Test
         void simpleTest() {
-            final var filter = CategoryFilter.builder().name("одежда").build();
+            final var filter = CategoryFilter.builder().name("clothing").build();
             final var page = categoryService.findAll(
                     new TreeViewOptions(0, 0), Pageable.unpaged(), filter
             );
@@ -80,7 +80,7 @@ public class CategoryServiceTest {
     @Test
     void findAllTest_defaultPage() {
         final var actual = categoryService.findAll();
-        actual.getContent().forEach(category -> System.out.println(category));
+        actual.getContent().forEach(System.out::println);
         assertThat(actual)
                 .isNotNull()
                 .isNotEmpty()
@@ -89,13 +89,10 @@ public class CategoryServiceTest {
                 .allMatch(it -> it.getParent() == null
                         && it.isRoot())
                 .allMatch(it -> it.getSubcategories() != null)
-                .allMatch(it -> it.getId() != null);
-        final var electronics = actual.get()
-                .filter(it -> it.getId().equals(1)
-                        && it.getId().equals(2)
-                        && it.getId().equals(3))
-                .findAny();
-
+                .allMatch(it -> it.getId() != null)
+                .anyMatch(it -> it.getId().equals(1))
+                .anyMatch(it -> it.getId().equals(2))
+                .anyMatch(it -> it.getId().equals(3));
     }
 
     //Поиск и фильтрация категории - Электроника/Electronics || EN || level = 0
@@ -112,7 +109,8 @@ public class CategoryServiceTest {
                 .allMatch(Objects::nonNull)
                 .allMatch(it -> it.getParent() == null
                         && it.isRoot())
-                .allMatch(it -> it.getSubcategories() != null)
+                .allMatch(it -> it.getSubcategories() != null
+                        && it.getSubcategories().isEmpty())
                 .allMatch(it -> it.getId() != null
                         && it.getId().equals(1))
                 .allMatch(it -> it.getInfo()

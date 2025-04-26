@@ -1,18 +1,21 @@
 package nocast.storeservice.user.mapper;
 
-import nocast.storeservice.user.dto.ReadUserDto;
+import lombok.RequiredArgsConstructor;
+import nocast.storeservice.common.components.Mapper;
+import nocast.storeservice.user.dto.UserReadDto;
 import nocast.storeservice.user.persistence.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReadDtoMapper {
-    public ReadUserDto map(User object) {
-        return new ReadUserDto(
+@RequiredArgsConstructor
+public class ReadDtoMapper implements Mapper<User, UserReadDto> {
+
+    @Override
+    public UserReadDto map(User object) {
+        return new UserReadDto(
                 object.getId(),
                 object.getUsername(),
                 object.getFirstName(),
-                object.getEmail(),
-                object.getPhoneNumber(),
-                object.getRoles().toString());
+                object.getRoles());
     }
 }

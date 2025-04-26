@@ -1,33 +1,38 @@
-package nocast.storeservice.user.mapper.component;
+package nocast.storeservice.common.components;
 
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.Expressions;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * @author vnavesnoj
+ * @mail vnavesnoj@gmail.com
+ */
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class QPredicates {
+
     private final List<Predicate> predicates = new ArrayList<>();
 
-    public static nocast.storeservice.user.mapper.component.QPredicates builder() {
-        return new nocast.storeservice.user.mapper.component.QPredicates();
+    public static QPredicates builder() {
+        return new QPredicates();
     }
 
-    public <T> nocast.storeservice.user.mapper.component.QPredicates add(T object, Function<T, Predicate> function) {
+    public <T> QPredicates add(T object, Function<T, Predicate> function) {
         if (object != null) {
             predicates.add(function.apply(object));
         }
         return this;
     }
 
-    public <T> nocast.storeservice.user.mapper.component.QPredicates add(Predicate predicate) {
+    public <T> QPredicates add(Predicate predicate) {
         predicates.add(predicate);
         return this;
     }

@@ -5,8 +5,8 @@ CREATE TABLE users
     password     VARCHAR(255) NOT NULL,
     email        VARCHAR(255) NOT NULL,
     first_name   VARCHAR(255),
-    phone_number INT,
-    roles        VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(255),
+    roles        VARCHAR(64)[] NOT NULL,
     created_at   TIMESTAMP,
     updated_at   TIMESTAMP
 );

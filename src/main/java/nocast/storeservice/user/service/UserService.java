@@ -1,7 +1,7 @@
 package nocast.storeservice.user.service;
 
-import nocast.storeservice.user.dto.ReadUserDto;
 import nocast.storeservice.user.dto.UserFilter;
+import nocast.storeservice.user.dto.UserReadDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,9 +9,9 @@ import java.util.Optional;
 
 public interface UserService {
 
-    Page<ReadUserDto> findAll();
+    Page<UserReadDto> findAll();
 
-    Page<ReadUserDto> findAll(Pageable pageable, UserFilter filter);
+    Page<UserReadDto> findAll(Pageable pageable, UserFilter filter);
 
-    Optional<ReadUserDto> findById(Long id);
+    Optional<UserReadDto> findById(Long id);
 }

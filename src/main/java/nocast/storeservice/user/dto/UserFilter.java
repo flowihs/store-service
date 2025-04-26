@@ -10,5 +10,5 @@ public class UserFilter {
     String username;
     String firstName;
     String email;
-    Integer phoneNumber;
+    String phoneNumber;
 }

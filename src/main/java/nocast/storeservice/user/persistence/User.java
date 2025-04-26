@@ -1,18 +1,20 @@
 package nocast.storeservice.user.persistence;
 
+import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import jakarta.persistence.*;
 import lombok.Getter;
-import nocast.storeservice.user.enums.TypeRole;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Table(name = "users")
 @Entity
 @Getter
+@Setter
 public class User {
 
     @Id
@@ -32,15 +34,16 @@ public class User {
     private String firstName;
 
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private String phoneNumber;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private TypeRole roles;
+    @Type(ListArrayType.class)
+    private List<String> roles;
 
     @CreationTimestamp
     private LocalDateTime created_at;
 
     @UpdateTimestamp
     private LocalDateTime updated_at;
+
 }

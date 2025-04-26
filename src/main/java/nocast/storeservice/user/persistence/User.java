@@ -35,10 +35,10 @@ public class User {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name",nullable = false)
     private String firstName;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -46,6 +46,7 @@ public class User {
     private List<String> roles;
 
     @CreationTimestamp
+    @Column(nullable = false)
     private LocalDateTime created_at;
 
     @UpdateTimestamp

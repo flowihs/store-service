@@ -1,4 +1,4 @@
-package nocast.storeservice.category.mapper.component;
+package nocast.storeservice.common.components;
 
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Predicate;

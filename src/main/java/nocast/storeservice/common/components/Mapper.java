@@ -1,4 +1,4 @@
-package nocast.storeservice.category.mapper;
+package nocast.storeservice.common.components;
 
 /**
  * @author vnavesnoj

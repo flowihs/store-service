@@ -4,7 +4,8 @@ import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.Expressions;
 import nocast.storeservice.category.dto.CategoryFilter;
 import nocast.storeservice.category.exception.LangCodeUndefinedException;
-import nocast.storeservice.category.mapper.component.QPredicates;
+import nocast.storeservice.common.components.Mapper;
+import nocast.storeservice.common.components.QPredicates;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 

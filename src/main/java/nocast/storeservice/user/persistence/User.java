@@ -26,22 +26,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String username;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 100)
     private String email;
 
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name", nullable = false, length = 100)
     private String firstName;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phone_number", nullable = false, length = 31)
     private String phoneNumber;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 64)
     @Type(ListArrayType.class)
     private List<String> roles;
 

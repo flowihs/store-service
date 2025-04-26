@@ -9,6 +9,4 @@ import lombok.Value;
 public class UserFilter {
     String username;
     String firstName;
-    String email;
-    String phoneNumber;
 }

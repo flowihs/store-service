@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class ReadDtoMapper implements Mapper<User, UserReadDto> {
+public class UserReadMapper implements Mapper<User, UserReadDto> {
 
     @Override
     public UserReadDto map(User object) {

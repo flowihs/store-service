@@ -49,4 +49,12 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    public User(String username, String password, String email, String firstName, String phoneNumber, List<String> roles) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.phoneNumber = phoneNumber;
+        this.roles = roles;
+    }
 }

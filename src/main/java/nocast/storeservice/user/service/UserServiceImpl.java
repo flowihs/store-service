@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
                 .map(createDtoMapper::map)
                 .map(userRepository::saveAndFlush)
                 .map(readDtoMapper::map)
-                .orElseThrow(() -> null);
+                .orElseThrow(NullPointerException::new);
     }
 }
 

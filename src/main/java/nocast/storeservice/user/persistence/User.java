@@ -2,9 +2,10 @@ package nocast.storeservice.user.persistence;
 
 import io.hypersistence.utils.hibernate.type.array.ListArrayType;
 import jakarta.persistence.*;
-import lombok.*;
-import lombok.experimental.FieldNameConstants;
-import org.apache.commons.lang3.builder.HashCodeExclude;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -39,7 +40,7 @@ public class User {
     @Column(name = "phone_number", nullable = false, length = 31)
     private String phoneNumber;
 
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 64, columnDefinition = "_varchar")
     @Type(ListArrayType.class)
     private List<String> roles;
 

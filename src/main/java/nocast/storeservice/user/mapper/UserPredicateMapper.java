@@ -12,6 +12,8 @@ import static nocast.storeservice.user.persistence.QUser.user;
 
 @Component
 public class UserPredicateMapper implements Mapper<UserFilter, Predicate> {
+
+    @Override
     public Predicate map(UserFilter userFilter) {
         return QPredicates.builder()
                 .add(userFilter.getUsername(), user.username::contains)

@@ -2,6 +2,7 @@ package nocast.storeservice.product.service;
 
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
+import nocast.storeservice.common.Mapper;
 import nocast.storeservice.common.components.Mapper;
 import nocast.storeservice.product.dto.ProductFilter;
 import nocast.storeservice.product.dto.ProductReadDto;
@@ -26,8 +27,8 @@ import static org.springframework.data.domain.Sort.by;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-    private final Mapper<Product, ProductReadDto> productReadMapper;
-    private final Mapper<ProductFilter, Predicate> productPredicateMapper;
+    private final nocast.storeservice.common.components.Mapper<Product, ProductReadDto> productReadMapper;
+    private final nocast.storeservice.common.components.Mapper<ProductFilter, Predicate> productPredicateMapper;
     private final Sort defaultSort = by(sortOrder, id);
     private final Pageable defaultPageable = PageRequest.of(0, 20, defaultSort);
 

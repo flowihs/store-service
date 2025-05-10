@@ -1,10 +1,10 @@
 package nocast.storeservice.product.mapper;
 
 import lombok.RequiredArgsConstructor;
-import nocast.storeservice.common.components.Mapper;
 import nocast.storeservice.product.dto.ProductReadDto;
 import nocast.storeservice.product.persistence.Product;
 import org.springframework.stereotype.Component;
+import nocast.storeservice.common.Mapper;
 
 @Component
 @RequiredArgsConstructor

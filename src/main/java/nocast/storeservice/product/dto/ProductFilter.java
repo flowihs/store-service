@@ -2,7 +2,6 @@ package nocast.storeservice.product.dto;
 
 import lombok.Builder;
 import lombok.Value;
-import nocast.storeservice.category.persistence.Category;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,7 +15,7 @@ public class ProductFilter {
     BigDecimal minPrice;
     BigDecimal maxPrice;
     PriceType priceType;
-    Category category;
+    Integer categoryId;
     Currency currency;
     LocalDateTime beforeCreateAt;
     LocalDateTime afterCreateAt;

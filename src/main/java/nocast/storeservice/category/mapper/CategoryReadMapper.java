@@ -23,10 +23,8 @@ import static java.util.function.Predicate.not;
 @RequiredArgsConstructor
 @Component
 public class CategoryReadMapper {
-
     private final RecursiveMapper<Category, CategoryBranchDto> categoryBranchMapper;
     private final RecursiveMapper<Category, CategoryTreeDto> categoryTreeMapper;
-
 
     public CategoryReadDto map(@NonNull Category object, int branchDepth, int treeDepth) {
         final var langCode = LocaleContextHolder.getLocale().getLanguage();

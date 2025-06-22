@@ -13,7 +13,7 @@ import java.util.Optional;
  * @mail vnavesnoj@gmail.com
  */
 
-public interface CategoryService {
+public interface CategoryService  {
 
     Page<CategoryReadDto> findAll();
 

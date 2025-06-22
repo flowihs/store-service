@@ -29,7 +29,6 @@ import static org.springframework.data.domain.Sort.by;
 @Transactional(readOnly = true)
 @Component
 public class CategoryServiceImpl implements CategoryService {
-
     private final CategoryRepository categoryRepository;
     private final CategoryReadMapper categoryReadMapper;
     private final CategoryPredicateMapper categoryPredicateMapper;

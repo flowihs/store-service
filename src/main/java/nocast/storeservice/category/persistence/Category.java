@@ -27,7 +27,6 @@ import java.util.Map;
 @Entity
 @Table(name = "category")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -78,7 +77,7 @@ public class Category {
         subcategories.add(subcategory);
         subcategory.setParent(this);
     }
-
+    
     public void removeSubcategory(Category subcategory) {
         subcategories.remove(subcategory);
         subcategory.setParent(null);

@@ -2,8 +2,6 @@ package nocast.storeservice.product.service;
 
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
-import nocast.storeservice.common.Mapper;
-import nocast.storeservice.common.components.Mapper;
 import nocast.storeservice.product.dto.ProductFilter;
 import nocast.storeservice.product.dto.ProductReadDto;
 import nocast.storeservice.product.persistence.Product;
@@ -25,7 +23,6 @@ import static org.springframework.data.domain.Sort.by;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
-
     private final ProductRepository productRepository;
     private final nocast.storeservice.common.components.Mapper<Product, ProductReadDto> productReadMapper;
     private final nocast.storeservice.common.components.Mapper<ProductFilter, Predicate> productPredicateMapper;

@@ -63,6 +63,7 @@ public class Product {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Builder.Default
     @Column(name = "is_active", nullable = false)
-    private Boolean isActive;
+    private boolean active = true;
 }
